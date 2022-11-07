@@ -19,10 +19,10 @@ def generate_path_list(img_dir):
 
 
 class MyDataSet(Dataset):
-    def __init__(self, root_dir, flag_dir="train", img_size=(512, 512)):
+    def __init__(self, root_dir, data_set='CHASE', flag_dir="train", img_size=(512, 512)):
         super(MyDataSet, self).__init__()
         self.flag = flag_dir
-        data_dir = os.path.join(root_dir, "CHASE", self.flag)
+        data_dir = os.path.join(root_dir, data_set, self.flag)
         self.img_list = generate_path_list(os.path.join(data_dir, 'images'))
         self.manual_list = generate_path_list(os.path.join(data_dir, '1st_manual'))
         self.img_size = img_size
@@ -40,7 +40,7 @@ class MyDataSet(Dataset):
 
 
 if __name__ == '__main__':
-    dataset = MyDataSet('./data', 'train')
+    dataset = MyDataSet('./data', 'CHASE', 'train')
     img, manual = dataset.__getitem__(2)
     print(img, manual)
     # plt.subplot(121)
